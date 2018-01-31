@@ -13,7 +13,7 @@ const bot = bb({
     client: redisClient
   }),
   polling: {
-    interval: 1000,
+    interval: 0,
     timeout: 1
   }
 });
@@ -30,7 +30,8 @@ bot.use('before', bb.middlewares.typing())
 bot.use('before', (ctx) => {
   debug('Received msg')
   if (ctx.isRedirected) return;
-  const msg = ctx.message
+  const msg = ctx.message;
+  debug('rev msg', msg);
   let url_entity = utils.urlEntity(msg)
   if (url_entity) {
     debug('Url detected')
